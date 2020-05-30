@@ -1,6 +1,6 @@
 import javax.swing.*;    
 import java.awt.event.*;    
-public class TextEditor implements ActionListener
+public class TextEditorGUI implements ActionListener
 {    
     JFrame f;    
     JMenuBar mb;    
@@ -8,7 +8,7 @@ public class TextEditor implements ActionListener
     JMenuItem cut,copy,paste,selectAll;    
     JTextArea ta;   
     
-    public TextEditor()
+    public TextEditorGUI()
     {
         
     }
