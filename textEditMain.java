@@ -1,5 +1,4 @@
-import javax.swing.*;    
-import java.awt.event.*;    
+import javax.swing.*;       
 import javax.swing.JFrame;
 
 public class textEditMain
@@ -8,23 +7,25 @@ public class textEditMain
     {
 
         JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame("Text Editor");
+        //JFrame frame = new JFrame("Text Editor");
 
         //Create and set up the content pane.
         TextEditorGUI demo = new TextEditorGUI();
-        frame.setContentPane(demo.createTextEditor());
-
+        JFrame frame = demo.createTextEditor();
+        //frame.setContentPane(demo.createTextEditor());
+        //frame.add(demo.createTextEditor());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 450);
+        //frame.setSize(400, 360);
         frame.setVisible(true);
     }  
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
+        //creating and showing this application's GUI.~      
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
             }
+            
         });
     }
 }
