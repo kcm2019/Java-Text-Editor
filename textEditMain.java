@@ -11,7 +11,7 @@ public class textEditMain
         JFrame frame = new JFrame("Text Editor");
 
         //Create and set up the content pane.
-        TextEditor demo = new TextEditor();
+        TextEditorGUI demo = new TextEditorGUI();
         frame.setContentPane(demo.createTextEditor());
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
