@@ -2,12 +2,12 @@ import javax.swing.*;
 import java.awt.event.*;    
 public class TextEditorGUI implements ActionListener
 {    
-    JFrame f;    
-    JMenuBar mb;    
-    JMenu file, edit, help;    
-    JMenuItem cut, copy, paste, selectAll, about;    
-    JTextArea ta;   
-    JScrollPane scroll;
+    private JFrame f;    
+    private JMenuBar mb;    
+    private JMenu file, edit, help;    
+    private JMenuItem cut, copy, paste, selectAll, about;    
+    private JTextArea ta;   
+    private JScrollPane scroll;
     
     public TextEditorGUI()
     {
@@ -51,6 +51,10 @@ public class TextEditorGUI implements ActionListener
         f.setVisible(true);  
         
         // Create scroll pane
+        scroll = new JScrollPane(ta);  
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+        f.setContentPane(scroll);
 
         return f;
     }   
