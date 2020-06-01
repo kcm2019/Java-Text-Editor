@@ -140,7 +140,7 @@ public class TextEditorGUI implements ActionListener
             PrintWriter outputPrintWriter = new PrintWriter(new FileWriter(file));
             //for (String line : textArea.getText().split("\\n")) 
             //    doStuffWithLine(line);
-            String textAreaString = textArea.toString();
+            String textAreaString = textArea.getText(); //Instead of .toString()
             System.out.print("TA STRING:" + textAreaString);
             outputPrintWriter.write(textAreaString);
             outputPrintWriter.close();
