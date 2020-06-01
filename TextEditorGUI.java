@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.File;
+import java.util.Scanner;
 
 public class TextEditorGUI implements ActionListener
 {    
@@ -87,6 +89,10 @@ public class TextEditorGUI implements ActionListener
         return f;
     }
 
+    public JTextArea getTa(){
+        return ta;
+    }
+
     public void actionPerformed(ActionEvent e) 
     {    
         if(e.getSource() == cut)    
@@ -104,9 +110,43 @@ public class TextEditorGUI implements ActionListener
             //FileWriter fileOut = new FileWriter("C:\\Users\\qwert\\Documents\\test.txt");
             //JFrame temp = getF();
             //temp.getTextArea().write(fileOut);
+            String fileName = JOptionPane.showInputDialog("Enter a name for this file");
+            if(!(fileName == null)){
+                File file = new File(fileName + ".txt");
+                saveMethod(fileName, getTa(), file);
+            }
         }
         if(e.getSource() == exit){
             System.exit(0);
         }
     } // end actionPerformed
+
+    /*
+    public void saveMethod(File fileName, TextArea textArea) {
+        if (file != null) {
+            String filePath = file.getAbsolutePath();
+            try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filePath))) {
+                writer.write(textArea.getText());
+            } catch (IOException e) {
+                System.out.println("savefile exception");
+            }
+        }
+    }
+    */
+    // Method for saving the JTextArea to a file
+    public void saveMethod(String fileName, JTextArea textArea, File file) {
+
+        try {
+            PrintWriter outputPrintWriter = new PrintWriter(new FileWriter(file));
+            //for (String line : textArea.getText().split("\\n")) 
+            //    doStuffWithLine(line);
+            String textAreaString = textArea.toString();
+            System.out.print("TA STRING:" + textAreaString);
+            outputPrintWriter.write(textAreaString);
+            outputPrintWriter.close();
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error Saving File", "Save Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 }
