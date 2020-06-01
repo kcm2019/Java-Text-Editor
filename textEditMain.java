@@ -6,7 +6,7 @@ public class textEditMain
     private static void createAndShowGUI() 
     {
 
-        JFrame.setDefaultLookAndFeelDecorated(true);
+        //JFrame.setDefaultLookAndFeelDecorated(true);
         //JFrame frame = new JFrame("Text Editor");
 
         //Create and set up the content pane.
