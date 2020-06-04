@@ -1,5 +1,9 @@
-import javax.swing.*;    
-import java.awt.event.*;   
+import javax.swing.*;
+import java.awt.GraphicsEnvironment;
+import java.awt.Font;
+import java.awt.*;
+import java.awt.event.*; 
+import java.awt.Desktop;  
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.FileReader;
@@ -16,6 +20,7 @@ public class TextEditorGUI implements ActionListener
     private JMenuItem cut, copy, paste, selectAll, about, save, openFile, exit;    
     private JTextArea ta;   
     private JScrollPane scroll;
+
     
     public TextEditorGUI()
     {
@@ -69,7 +74,11 @@ public class TextEditorGUI implements ActionListener
         
         // Create text area
         ta = new JTextArea();    
-        ta.setBounds(5,5,400,360);    
+        ta.setBounds(5,5,400,360);  
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.getAllFonts();
+        Font font = new Font("Monospaced", Font.PLAIN, 13);
+        ta.setFont(font);  
         f.add(mb); f.add(ta);    
         f.setJMenuBar(mb);  
         f.setLayout(null);    
@@ -116,9 +125,21 @@ public class TextEditorGUI implements ActionListener
                 saveMethod(fileName, getTa(), file);
             }
         }
+        if(e.getSource() == openFile){
+            //File file = new File("bruh.txt");
+            //File file = new File ("c:\"");
+            //openFileMethod(file);
+            final FileDialog fileDialog = new FileDialog(f,"Select file");
+            fileDialog.setVisible(true);
+            //String temp = fileDialog.getFile().toString();
+            ta.setText(temp);
+
+            
+        }
         if(e.getSource() == exit){
             System.exit(0);
         }
+
     } // end actionPerformed
 
     /*
@@ -148,5 +169,30 @@ public class TextEditorGUI implements ActionListener
         catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error Saving File", "Save Error", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+    public void openFileMethod(File file){
+        /*
+        try{
+            //Desktop.getDesktop().open(file);
+            //File file = new File ("c:\"<directory>");
+            //Desktop desktop = Desktop.getDesktop();
+            //desktop.open(file);
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error Saving File", "Save Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        try {
+            Desktop.getDesktop().open(new File("C:/"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        if (Desktop.isDesktopSupported()) {
+            Desktop desktop = Desktop.getDesktop();
+            desktop.browse(uri); // Throws
+        }
+        */
+
     }
 }
