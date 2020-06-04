@@ -20,6 +20,7 @@ public class TextEditorGUI implements ActionListener
     private JMenuItem cut, copy, paste, selectAll, about, save, openFile, exit;    
     private JTextArea ta;   
     private JScrollPane scroll;
+    private FileDialog fileDialog;
 
     
     public TextEditorGUI()
@@ -101,6 +102,9 @@ public class TextEditorGUI implements ActionListener
     public JTextArea getTa(){
         return ta;
     }
+    public FileDialog getfFileDialog(){
+        return fileDialog;
+    }
 
     public void actionPerformed(ActionEvent e) 
     {    
@@ -126,13 +130,29 @@ public class TextEditorGUI implements ActionListener
             }
         }
         if(e.getSource() == openFile){
-            //File file = new File("bruh.txt");
-            //File file = new File ("c:\"");
-            //openFileMethod(file);
-            final FileDialog fileDialog = new FileDialog(f,"Select file");
-            fileDialog.setVisible(true);
-            //String temp = fileDialog.getFile().toString();
-            ta.setText(temp);
+            try{
+                //File file = new File("bruh.txt");
+                //File file = new File ("c:\"");
+                //openFileMethod(file);
+                fileDialog = new FileDialog(f,"Select file");
+                fileDialog.setVisible(true);
+                Scanner inputFile = new Scanner(new File(fileDialog.getFile()));
+                String fileLines = "";
+                while(inputFile.hasNext()){
+                    String oneLine = inputFile.nextLine();
+                    Scanner lineTokenizer = new Scanner (oneLine);
+                    lineTokenizer.useDelimiter("\n");
+                    fileLines += lineTokenizer.next() + "\n";
+                }
+                //File file = new File(fileDialog.getFile());
+                System.out.println(fileLines);
+                //File.open(file);
+                //String temp = fileDialog.getFile().toString();
+                ta.setText(fileLines);
+            }
+            catch(IOException ex){
+                ex.printStackTrace();
+            }
 
             
         }
