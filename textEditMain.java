@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 
 public class textEditMain
 {
-    private static void createAndShowGUI() 
+    private static void createAndShowGUI()
     {
 
         //JFrame.setDefaultLookAndFeelDecorated(true);

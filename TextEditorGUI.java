@@ -123,10 +123,22 @@ public class TextEditorGUI implements ActionListener
             //FileWriter fileOut = new FileWriter("C:\\Users\\qwert\\Documents\\test.txt");
             //JFrame temp = getF();
             //temp.getTextArea().write(fileOut);
+            /*
             String fileName = JOptionPane.showInputDialog("Enter a name for this file");
             if(!(fileName == null)){
                 File file = new File(fileName + ".txt");
                 saveMethod(fileName, getTa(), file);
+            }
+            */
+            JFrame parentFrame = new JFrame();
+ 
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Specify a file to save");   
+ 
+            int userSelection = fileChooser.showSaveDialog(parentFrame);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                System.out.println("Save as file: " + fileToSave.getAbsolutePath());
             }
         }
         if(e.getSource() == openFile){
@@ -140,7 +152,7 @@ public class TextEditorGUI implements ActionListener
                 String fileLines = "";
                 while(inputFile.hasNext()){
                     String oneLine = inputFile.nextLine();
-                    Scanner lineTokenizer = new Scanner (oneLine);
+                    Scanner lineTokenizer = new Scanner(oneLine);
                     lineTokenizer.useDelimiter("\n");
                     fileLines += lineTokenizer.next() + "\n";
                 }
