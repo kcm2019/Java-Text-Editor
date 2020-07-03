@@ -106,7 +106,7 @@ public class TextEditorGUI implements ActionListener
         return fileDialog;
     }
 
-    public void actionPerformed(ActionEvent e) 
+    public void actionPerformed(ActionEvent e)
     {    
         if(e.getSource() == cut)    
             ta.cut();   
@@ -123,26 +123,13 @@ public class TextEditorGUI implements ActionListener
             //FileWriter fileOut = new FileWriter("C:\\Users\\qwert\\Documents\\test.txt");
             //JFrame temp = getF();
             //temp.getTextArea().write(fileOut);
-            
+            /*
             String fileName = JOptionPane.showInputDialog("Enter a name for this file");
             if(!(fileName == null)){
                 File file = new File(fileName + ".txt");
                 saveMethod(fileName, getTa(), file);
             }
-            /*
-            JFrame parentFrame = new JFrame();
- 
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Specify a file to save");   
- 
-            int userSelection = fileChooser.showSaveDialog(parentFrame);
-            if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File fileToSave = fileChooser.getSelectedFile();
-                System.out.println("Save as file: " + fileToSave.getAbsolutePath());
-            }
             */
-            //This is the working save
-            /*
             JFrame parentFrame = new JFrame();
  
             JFileChooser fileChooser = new JFileChooser();
@@ -154,12 +141,35 @@ public class TextEditorGUI implements ActionListener
                 saveMethod(fileToSave.getName(), getTa(), fileToSave);
                 System.out.println("Save as file: " + fileToSave.getAbsolutePath());
             }
-            */
+        }
         if(e.getSource() == openFile){
             try{
                 //File file = new File("bruh.txt");
                 //File file = new File ("c:\"");
                 //openFileMethod(file);
+                JFrame parentFrame = new JFrame();
+
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Specify a file to open");
+                int userSelection = fileChooser.showOpenDialog(parentFrame);
+                Scanner inputFile = new Scanner(fileChooser.getSelectedFile());
+                String fileLines = "";
+
+                if (userSelection == JFileChooser.APPROVE_OPTION) {
+                    File fileToOpen = fileChooser.getSelectedFile();
+                    while (inputFile.hasNext()) {
+                        String oneLine = inputFile.nextLine();
+                        Scanner lineTokenizer = new Scanner (oneLine);
+                        lineTokenizer.useDelimiter("\n");
+                        fileLines += lineTokenizer.next();
+                    }
+                    ta.setText(fileLines);
+                }
+                else {
+                    throw new IOException();
+                }
+
+                /*
                 fileDialog = new FileDialog(f,"Select file");
                 fileDialog.setVisible(true);
                 Scanner inputFile = new Scanner(new File(fileDialog.getFile()));
@@ -175,12 +185,11 @@ public class TextEditorGUI implements ActionListener
                 //File.open(file);
                 //String temp = fileDialog.getFile().toString();
                 ta.setText(fileLines);
+                */
             }
             catch(IOException ex){
-                ex.printStackTrace();
-            }
-
-            
+                System.out.println("Error opening file");
+            }        
         }
         if(e.getSource() == exit){
             System.exit(0);
