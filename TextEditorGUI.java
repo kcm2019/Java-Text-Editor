@@ -156,12 +156,17 @@ public class TextEditorGUI implements ActionListener
                 String fileLines = "";
 
                 if (userSelection == JFileChooser.APPROVE_OPTION) {
-                    File fileToOpen = fileChooser.getSelectedFile();
                     while (inputFile.hasNext()) {
                         String oneLine = inputFile.nextLine();
                         Scanner lineTokenizer = new Scanner (oneLine);
                         lineTokenizer.useDelimiter("\n");
-                        fileLines += lineTokenizer.next();
+                        if (lineTokenizer.hasNext() == false) {
+                            fileLines += "\n";
+                        }
+                        else {
+                            fileLines += lineTokenizer.next() + "\n";
+                        }
+                        lineTokenizer.close();
                     }
                     ta.setText(fileLines);
                 }
