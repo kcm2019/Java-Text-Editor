@@ -17,6 +17,8 @@ public class textEditMain
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setSize(400, 360);
         frame.setVisible(true);
+        frame.setIconImage(new ImageIcon("icon.png").getImage());
+        frame.setTitle("Basic Java Text Editor");
     }  
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:

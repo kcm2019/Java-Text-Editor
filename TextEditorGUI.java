@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 public class TextEditorGUI implements ActionListener
 {    
+    //Necessary J items for the GUI
     private JFrame f;    
     private JMenuBar mb;    
     private JMenu file, edit, help;    
@@ -22,7 +23,7 @@ public class TextEditorGUI implements ActionListener
     private JScrollPane scroll;
     private FileDialog fileDialog;
 
-    
+    //Constructor
     public TextEditorGUI()
     {
         
@@ -86,26 +87,27 @@ public class TextEditorGUI implements ActionListener
         f.setSize(400,400);    
         f.setVisible(true);  
         
-        // Create scroll pane
+        // Create scroll pane to enable scroll on the TA
         scroll = new JScrollPane(ta);  
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
         f.setContentPane(scroll);
 
         return f;
-    } 
+    }//end createTextEditor
     
     public JFrame getF() {
         return f;
-    }
+    }//end getF
 
     public JTextArea getTa(){
         return ta;
-    }
+    }//end getTa
     public FileDialog getfFileDialog(){
         return fileDialog;
-    }
+    }//end getFileDialog
 
+    //Can definitey make this into a switch statement to run lighter
     public void actionPerformed(ActionEvent e)
     {    
         if(e.getSource() == cut)    
@@ -117,8 +119,8 @@ public class TextEditorGUI implements ActionListener
         if(e.getSource() == selectAll)    
             ta.selectAll();          
         if(e.getSource() == about) {
-            JOptionPane.showMessageDialog(null, "Made By Kurt Muller\nDate: May 30, 2020\nBruh Moment", "About", JOptionPane.INFORMATION_MESSAGE);
-        }
+            JOptionPane.showMessageDialog(null, "Made By Kurt Muller\nDate: January 1, 2021\nHave a great day!", "About", JOptionPane.INFORMATION_MESSAGE);
+        }//end if
         if(e.getSource() == save) {
             //FileWriter fileOut = new FileWriter("C:\\Users\\qwert\\Documents\\test.txt");
             //JFrame temp = getF();
@@ -140,13 +142,14 @@ public class TextEditorGUI implements ActionListener
                 File fileToSave = fileChooser.getSelectedFile();
                 saveMethod(fileToSave.getName(), getTa(), fileToSave);
                 System.out.println("Save as file: " + fileToSave.getAbsolutePath());
-            }
-        }
+            }//end if
+        }//end if
         if(e.getSource() == openFile){
             try{
                 //File file = new File("bruh.txt");
                 //File file = new File ("c:\"");
                 //openFileMethod(file);
+                //Creates new frame for fileChooser
                 JFrame parentFrame = new JFrame();
 
                 JFileChooser fileChooser = new JFileChooser();
@@ -154,25 +157,28 @@ public class TextEditorGUI implements ActionListener
                 int userSelection = fileChooser.showOpenDialog(parentFrame);
                 Scanner inputFile = new Scanner(fileChooser.getSelectedFile());
                 String fileLines = "";
-
+                
+                //If the user chooses to select a file or not
                 if (userSelection == JFileChooser.APPROVE_OPTION) {
                     while (inputFile.hasNext()) {
                         String oneLine = inputFile.nextLine();
                         Scanner lineTokenizer = new Scanner (oneLine);
                         lineTokenizer.useDelimiter("\n");
+
                         if (lineTokenizer.hasNext() == false) {
                             fileLines += "\n";
-                        }
+                        }//end if 
                         else {
                             fileLines += lineTokenizer.next() + "\n";
-                        }
+                        }//end else
+
                         lineTokenizer.close();
-                    }
+                    }//end while
                     ta.setText(fileLines);
-                }
+                }//end if
                 else {
                     throw new IOException();
-                }
+                }//end if 
 
                 /*
                 fileDialog = new FileDialog(f,"Select file");
@@ -191,14 +197,14 @@ public class TextEditorGUI implements ActionListener
                 //String temp = fileDialog.getFile().toString();
                 ta.setText(fileLines);
                 */
-            }
+            }//end try
             catch(IOException ex){
                 System.out.println("Error opening file");
-            }        
+            }//end catch    
         }
         if(e.getSource() == exit){
             System.exit(0);
-        }
+        }//end if
 
     } // end actionPerformed
 
@@ -216,7 +222,6 @@ public class TextEditorGUI implements ActionListener
     */
     // Method for saving the JTextArea to a file
     public void saveMethod(String fileName, JTextArea textArea, File file) {
-
         try {
             PrintWriter outputPrintWriter = new PrintWriter(new FileWriter(file));
             //for (String line : textArea.getText().split("\\n")) 
@@ -225,10 +230,10 @@ public class TextEditorGUI implements ActionListener
             System.out.print("TA STRING:" + textAreaString);
             outputPrintWriter.write(textAreaString);
             outputPrintWriter.close();
-        }
+        }//end try
         catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error Saving File", "Save Error", JOptionPane.INFORMATION_MESSAGE);
-        }
+        }//end catch
     }
     public void openFileMethod(File file){
         /*
